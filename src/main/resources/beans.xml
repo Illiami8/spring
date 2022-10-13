@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+default-init-method="init" default-destroy-method="destroy"
+>
+
+    <!-- bean definitions here -->
+
+    <bean id="jong" class="com.cherepovski.model.Student" init-method="initCreate" destroy-method="destroyStudent">
+<constructor-arg index="0" value="1"/>
+<constructor-arg index="1" value="Jong"/>
+<constructor-arg index="2" >
+    <map>
+        <entry key="Java" value="9"/>
+        <entry key="Python" value="8"/>
+        <entry key="Java" value="7"/>
+    </map>
+</constructor-arg>
+    </bean>
+
+    <bean id="bob" class="com.cherepovski.model.Student">
+<property name ="id" value = "1"/>
+<property name ="name" value = "Bob"/>
+<property name ="marks">
+        <map>
+            <entry key="Java" value="9"/>
+            <entry key="Python" value="8"/>
+            <entry key="Java" value="7"/>
+        </map>
+</property>
+    </bean>
+
+<bean id="anna" class="com.cherepovski.model.Student">
+<constructor-arg name="id" value="3"/>
+<constructor-arg name="name" value="Anna"/>
+    <property name="marks">
+        <map>
+            <entry key="Java" value="9"/>
+            <entry key="Python" value="8"/>
+            <entry key="Java" value="7"/>
+        </map>
+    </property>
+</bean>
+
+    <bean id="alex" class="com.cherepovski.model.Teacher" >
+        <constructor-arg name="id" value="1"/>
+        <constructor-arg name="name" value="Alex"/>
+        <constructor-arg name="saary" value="1000"/>
+    </bean>
+
+  <bean id="java" class="com.cherepovski.model.Group">
+<constructor-arg name="id" value="1"/>
+      <constructor-arg name ="name" value="Java"/>
+      <constructor-arg name ="teacher" ref="alex"/>
+      <property name="students">
+          <list>
+              <ref bean="jong"/>
+              <ref bean="bob"/>
+              <ref bean="anna"/>
+          </list>
+      </property>
+  </bean>
+
+
+</beans>
+
+
+
