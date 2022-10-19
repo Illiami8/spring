@@ -15,9 +15,14 @@ public class Group implements Printing {
     private Teacher teacher;
     private List<Student> students;
 
-    public Group(int id, String name,Teacher teacher){
+    public Group(int id, String name){
         this.id = id;
         this.name = name;
-        this.teacher = teacher;
     }
+
+    //public Group(int id, String name,Teacher teacher){
+    //    this.id = id;
+   //     this.name = name;
+     //   this.teacher = teacher;
+   // }
 }

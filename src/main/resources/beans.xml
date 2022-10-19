@@ -1,69 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-default-init-method="init" default-destroy-method="destroy"
+       default-init-method="init" default-destroy-method="destroy"
 >
+<util:map id="JongMarks">
+    <entry key="Java" value="9"/>
+    <entry key="Python" value="8"/>
+    <entry key="Java" value="7"/>
+</util:map>
 
-    <!-- bean definitions here -->
-
-    <bean id="jong" class="com.cherepovski.model.Student" init-method="initCreate" destroy-method="destroyStudent">
-<constructor-arg index="0" value="1"/>
-<constructor-arg index="1" value="Jong"/>
-<constructor-arg index="2" >
-    <map>
+    <util:map id="BobMarks">
         <entry key="Java" value="9"/>
         <entry key="Python" value="8"/>
         <entry key="Java" value="7"/>
-    </map>
-</constructor-arg>
+    </util:map>
+
+    <!-- bean definitions here -->
+<util:map id="AnnaMarks">
+    <entry key="Java" value="6"/>
+    <entry key="Python" value="8"/>
+    <entry key="Java" value="7"/>
+</util:map>
+
+    <bean id="jong" class="com.cherepovski.model.Student" c:_0="1" c:_1="Jong" c:_2-ref="JongMarks"/>
+        <!--<constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="Jong"/>  !-->
+    <bean id="bob" class="com.cherepovski.model.Student" p:id="2" p:name="Bob" p:marks-ref="BobMarks"/>
+        <!--<property name ="id" value = "2"/>
+        <property name ="name" value = "Bob"/>!-->
+    <bean id="anna" class="com.cherepovski.model.Student" p:id="3" p:name="Anna" p:marks-ref="AnnaMarks"/>
+     <!--   <constructor-arg name="id" value="3"/>
+        <constructor-arg name="name" value="Anna"/>
+        <property name="marks">
+            <map>
+                <entry key="Java" value="9"/>
+                <entry key="Python" value="8"/>
+                <entry key="Java" value="7"/>
+            </map>
+        </property>
+    </bean>!-->
+
+    <bean id="alex" class="com.cherepovski.model.Teacher" c:id="1" c:name="Alex" c:salary="1000">
+        <!--  <constructor-arg name="id" value="1"/>
+          <constructor-arg name="name" value="Alex"/>
+          <constructor-arg name="saary" value="1000"/>!-->
     </bean>
 
-    <bean id="bob" class="com.cherepovski.model.Student">
-<property name ="id" value = "1"/>
-<property name ="name" value = "Bob"/>
-<property name ="marks">
-        <map>
-            <entry key="Java" value="9"/>
-            <entry key="Python" value="8"/>
-            <entry key="Java" value="7"/>
-        </map>
-</property>
+
+    <util:list id="JavaStudents">
+        <ref bean="jong"/>
+        <ref bean="bob"/>
+        <ref bean="anna"/>
+    </util:list>
+    <bean id="java" class="com.cherepovski.model.Group" c:id="1" c:name="Java" c:teacher-ref="alex" p:students-ref="JavaStudents"/>
+        <!--<constructor-arg name="id" value="1"/>
+              <constructor-arg name ="name" value="Java"/>
+              <constructor-arg name ="teacher" ref="alex"/>
+        <property name="students">
+            <list>
+                <ref bean="jong"/>
+                <ref bean="bob"/>
+                <ref bean="anna"/>
+            </list>
+        </property>
     </bean>
-
-<bean id="anna" class="com.cherepovski.model.Student">
-<constructor-arg name="id" value="3"/>
-<constructor-arg name="name" value="Anna"/>
-    <property name="marks">
-        <map>
-            <entry key="Java" value="9"/>
-            <entry key="Python" value="8"/>
-            <entry key="Java" value="7"/>
-        </map>
-    </property>
-</bean>
-
-    <bean id="alex" class="com.cherepovski.model.Teacher" >
-        <constructor-arg name="id" value="1"/>
-        <constructor-arg name="name" value="Alex"/>
-        <constructor-arg name="saary" value="1000"/>
+!-->
+    <bean id="elGroup" class="com.cherepovski.model.Group">
+        <property name="id" value="#{java.id + 1}"/>
+        <property name="name" value="#{'ElGroup-' + new java.util.Random().nextInt(10)}"/>
+        <property name="teacher">
+            <bean class="com.cherepovski.model.Teacher" c:id="#{T(java.lang.Math).round(T(java.lang.Math).PI)}"
+                  c:name="#{java.name}-abc" c:salary="#{1000 + new java.util.Random().nextInt(100)}">
+            </bean>
+        </property>
+        <property name="students">
+            <util:list>
+                <bean class="com.cherepovski.model.Student" c:id="13" c:name="Student"/>
+            </util:list>
+        </property>
     </bean>
-
-  <bean id="java" class="com.cherepovski.model.Group">
-<constructor-arg name="id" value="1"/>
-      <constructor-arg name ="name" value="Java"/>
-      <constructor-arg name ="teacher" ref="alex"/>
-      <property name="students">
-          <list>
-              <ref bean="jong"/>
-              <ref bean="bob"/>
-              <ref bean="anna"/>
-          </list>
-      </property>
-  </bean>
-
-
 </beans>
 
 

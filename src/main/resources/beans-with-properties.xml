@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+    <context:property-placeholder location="teacher.properties, bob.properties, jong.properties"/>
+
+
+
+    <bean id="jong" class="com.cherepovski.model.Student" c:_0="${jong.id}" c:_1="${jong.name}" c:_2="#{${jong.marks}}"/>
+
+    <bean id="bob" class="com.cherepovski.model.Student" p:id="${bob.id}" p:name="${bob.name}" p:marks="#{${bob.marks}}"/>
+
+
+    <bean id="alex" class="com.cherepovski.model.Teacher" c:id="${alex.id}" c:name="${alex.name}" c:salary="${alex.salary}"
+    p:certificates="certificates"/>
+
+    <bean id="anton" class="com.cherepovski.model.Teacher" c:id="${anton.id}" c:name="${anton.name}" c:salary="${anton.salary}"
+          p:certificates="certificates"/>
+
+
+    <util:list id="JavaStudents">
+        <ref bean="jong"/>
+        <ref bean="bob"/>
+    </util:list>
+    <bean id="java" class="com.cherepovski.model.Group" c:id="1" c:name="Java" c:teacher-ref="anton" p:students-ref="JavaStudents"/>
+
+</beans>
+
+
+
