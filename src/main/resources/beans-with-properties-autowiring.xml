@@ -9,9 +9,11 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
-       default-autowire="byType"
+
 >
     <context:property-placeholder location="teacher.properties, bob.properties, jong.properties"/>
+
+<context:annotation-config />
 
 
 
@@ -21,7 +23,9 @@
 
 
     <bean id="alex" class="com.cherepovski.model.Teacher" c:id="${alex.id}" c:name="${alex.name}" c:salary="${alex.salary}"
-    p:certificates="certificates" primary="true"/>
+    p:certificates="certificates" >
+        <qualifier value="alex"/>
+    </bean>
 
     <bean id="anton" class="com.cherepovski.model.Teacher" c:id="${anton.id}" c:name="${anton.name}" c:salary="${anton.salary}"
           p:certificates="certificates"/>
@@ -32,7 +36,7 @@
         <ref bean="bob"/>
     </util:list>
     <bean id="java" class="com.cherepovski.model.Group" c:id="1" c:name="Java"
-          p:students-ref="JavaStudents" autowire="byName"/>
+          p:students-ref="JavaStudents" />
 
 </beans>
 
