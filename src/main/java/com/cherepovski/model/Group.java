@@ -1,5 +1,8 @@
 package com.cherepovski.model;
 
+import com.cherepovski.model.qualifier.AlexQualifier;
+import com.cherepovski.model.qualifier.AntonQualifier;
+import com.cherepovski.model.qualifier.MentorQualifaer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +17,7 @@ public class Group implements Printing {
     private int id;
     private String name;
 
-    private Teacher teacher;
+    private Employee  employee;
     private List<Student> students;
 
     public Group(int id, String name){
@@ -23,9 +26,10 @@ public class Group implements Printing {
     }
 
     @Autowired
-    @Qualifier("alex")
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    @MentorQualifaer
+   // @AntonQualifier
+    public void setEmployee(Employee employee){
+        this.employee = employee;
     }
 //public Group(int id, String name,Teacher teacher){
     //    this.id = id;

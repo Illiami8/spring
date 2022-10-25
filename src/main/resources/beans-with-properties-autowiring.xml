@@ -22,14 +22,16 @@
     <bean id="bob" class="com.cherepovski.model.Student" p:id="${bob.id}" p:name="${bob.name}" p:marks="#{${bob.marks}}"/>
 
 
-    <bean id="alex" class="com.cherepovski.model.Teacher" c:id="${alex.id}" c:name="${alex.name}" c:salary="${alex.salary}"
+    <bean id="alex" class="com.cherepovski.model.Mentor" c:id="${alex.id}" c:name="${alex.name}" c:salary="${alex.salary}"
     p:certificates="certificates" >
-        <qualifier value="alex"/>
+        <qualifier type="alex"/>
+        <qualifier type="com.cherepovski.model.qualifier.AlexQualifier"/>
     </bean>
 
     <bean id="anton" class="com.cherepovski.model.Teacher" c:id="${anton.id}" c:name="${anton.name}" c:salary="${anton.salary}"
-          p:certificates="certificates"/>
-
+          p:certificates="certificates">
+    <qualifier type="com.cherepovski.model.qualifier.AntonQualifier"/>
+</bean>
 
     <util:list id="JavaStudents">
         <ref bean="jong"/>
