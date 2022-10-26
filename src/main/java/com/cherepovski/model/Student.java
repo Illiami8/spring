@@ -1,6 +1,7 @@
 package com.cherepovski.model;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @NoArgsConstructor
+@Component
 public class Student extends Person {
    private Map<String,Integer> marks;
 
