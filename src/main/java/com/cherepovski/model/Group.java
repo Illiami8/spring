@@ -22,7 +22,7 @@ public class Group implements Printing {
     @Value("JavaEE")
     private String name;
 
-@Value("#{teacher}")
+
     private Employee  employee;
     private List<Student> students;
 
@@ -36,8 +36,9 @@ public class Group implements Printing {
         this.students = students;
     }
 
-   // @Autowired
-  //  @MentorQualifaer
+    @Autowired
+    @Qualifier("teacher")
+    //@MentorQualifaer
    // @AntonQualifier
     public void setEmployee(Employee employee){
         this.employee = employee;
